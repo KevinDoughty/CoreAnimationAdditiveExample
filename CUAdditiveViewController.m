@@ -159,10 +159,10 @@ typedef NS_OPTIONS(NSUInteger, CUAnimationType) {
 
     animationLayer.position = CGPointMake(animationLayer.position.x, [endValue intValue]);
 
-    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :0 :.5 :1];
-    animation.fillMode = kCAFillModeBackwards;
-    static unsigned long number = 0;
-    NSString *key = [NSString stringWithFormat:@"ani_%lu", number++];
+    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :0 :.5 :1]; // better easing function
+    animation.fillMode = kCAFillModeBackwards; // prevent race condition
+    static NSUInteger number = 0; // use nil key or integer, not [NSDate date] because string description only shows seconds
+    NSString *key = [NSString stringWithFormat:@"ani_%lu", (unsigned long)number++];
     
     [animationLayer addAnimation:animation forKey:key];
   }
