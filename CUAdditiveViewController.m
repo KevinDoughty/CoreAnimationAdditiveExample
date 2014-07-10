@@ -159,9 +159,11 @@ typedef NS_OPTIONS(NSUInteger, CUAnimationType) {
 
     animationLayer.position = CGPointMake(animationLayer.position.x, [endValue intValue]);
 
+    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :0 :.5 :1];
     animation.fillMode = kCAFillModeBackwards;
-    static NSUInteger number = 0;
+    static unsigned long number = 0;
     NSString *key = [NSString stringWithFormat:@"ani_%lu", number++];
+    
     [animationLayer addAnimation:animation forKey:key];
   }
       break;
