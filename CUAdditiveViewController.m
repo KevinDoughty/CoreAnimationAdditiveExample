@@ -159,7 +159,9 @@ typedef NS_OPTIONS(NSUInteger, CUAnimationType) {
 
     animationLayer.position = CGPointMake(animationLayer.position.x, [endValue intValue]);
 
-    NSString *key = [NSString stringWithFormat:@"ani_%@", [NSDate date]];
+    animation.fillMode = kCAFillModeBackwards;
+    static NSUInteger number = 0;
+    NSString *key = [NSString stringWithFormat:@"ani_%lu", number++];
     [animationLayer addAnimation:animation forKey:key];
   }
       break;
