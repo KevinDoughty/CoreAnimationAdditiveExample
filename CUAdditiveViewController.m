@@ -117,7 +117,7 @@ typedef NS_OPTIONS(NSUInteger, CUAnimationType) {
   NSNumber *endValue = toValue;
   CABasicAnimation *animation = [CABasicAnimation animation];
   animation.keyPath = @"position.y";
-  animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+  animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :0 :.5 :1]; // better easing function
   animation.duration = 1; //modify better
   
   switch (type) {
@@ -159,7 +159,6 @@ typedef NS_OPTIONS(NSUInteger, CUAnimationType) {
 
     animationLayer.position = CGPointMake(animationLayer.position.x, [endValue intValue]);
 
-    animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:.5 :0 :.5 :1]; // better easing function
     animation.fillMode = kCAFillModeBackwards; // prevent race condition
     static NSUInteger number = 0; // use nil key or integer, not [NSDate date] because string description only shows seconds
     NSString *key = [NSString stringWithFormat:@"ani_%lu", (unsigned long)number++];
